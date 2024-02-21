@@ -9,6 +9,8 @@ with open('file.txt','r') as f:
 with open('ai_config','r') as g:
     ai_config = g.read()
 
+with open('fake_ai_config', 'r') as h:
+    fake_ai_config = h.read()
 
 app = Flask(__name__)
 openai.api_key  = blah.rstrip()
