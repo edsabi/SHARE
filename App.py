@@ -26,6 +26,18 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
     )
     
     return response.choices[0].message["content"]
+def get_fakestory(prompt, model="gpt-3.5-turbo"):
+    messages = [
+            {"role":"system","content":f"{fake_ai_config}"},
+            {"role":"user", "content": prompt }
+    ]
+    response = openai.ChatCompletion.create(
+            model=model,
+            messages=messages,
+            temperature=0,
+    )
+    return response.choices[0].message["content"]
+
 
 @app.route("/theunknown1")
 def home():    
@@ -39,7 +51,7 @@ def get_bot_response():
     if "SHARE" not in response:
         return response
     else:
-        response ="Unfortunately I am not supposed to talk about the company. There are built in protections that are looking at my response that are looking to SHARE related responses."
+        response = get_fakestory(userText)
         return response
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=50050)
